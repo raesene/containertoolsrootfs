@@ -1,5 +1,6 @@
 FROM ghcr.io/iximiuz/labs/rootfs:ubuntu-docker
 
+# Switch to the root user to do install things
 USER root
 
 
@@ -50,13 +51,13 @@ RUN curl -OL https://github.com/derailed/k9s/releases/download/v0.32.7/k9s_Linux
 tar -zxvf k9s_Linux_amd64.tar.gz && mv k9s /usr/local/bin && chmod +x /usr/local/bin/k9s && rm -f k9s_Linux_amd64.tar.gz LICENSE README.md
 
 #Setup Starship prompt
-RUN curl -fsSL https://starship.rs/install.sh | sh -s -- -y && mkdir /root/.config
+RUN curl -fsSL https://starship.rs/install.sh | sh -s -- -y && mkdir /home/laborant/.config
 
 #Add starship to the bashrc
-RUN echo 'eval "$(starship init bash)"' >> /root/.bashrc
+RUN echo 'eval "$(starship init bash)"' >> /home/laborant/.bashrc
 
 #Copy the starship config
-COPY /config_files/starship.toml /root/.config/starship.toml
+COPY /config_files/starship.toml /home/laborant/.config/starship.toml
 
 #Get Kubectx and Kubens
 RUN git clone https://github.com/ahmetb/kubectx /opt/kubectx && \
@@ -82,13 +83,3 @@ COPY /scripts/* /scripts/
 
 # Switch back to Laborant at the end
 USER laborant
-
-# Set the entry point script and make it executable
-#COPY entrypoint.sh /
-#RUN chmod +x /entrypoint.sh
-
-#SetUID shell might be handy
-#RUN cp /bin/bash /bin/setuidbash && chmod 4755 /bin/setuidbash
-
-#We can run this but lets let it be overridden with a CMD 
-#CMD ["/entrypoint.sh"]
