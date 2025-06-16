@@ -81,5 +81,8 @@ COPY /manifests/* /manifests/
 RUN mkdir /scripts
 COPY /scripts/* /scripts/
 
+# Get kind
+RUN wget https://github.com/kubernetes-sigs/kind/releases/download/v0.29.0/kind-linux-amd64 && chmod +x kind-linux-amd64 && mv kind-linux-amd64 /usr/local/bin/kind
+
 # Switch back to Laborant at the end
 USER laborant
