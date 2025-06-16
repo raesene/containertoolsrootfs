@@ -80,12 +80,15 @@ COPY /manifests/* /manifests/
 RUN mkdir /scripts
 COPY /scripts/* /scripts/
 
+# Switch back to Laborant at the end
+USER laborant
+
 # Set the entry point script and make it executable
-COPY entrypoint.sh /
-RUN chmod +x /entrypoint.sh
+#COPY entrypoint.sh /
+#RUN chmod +x /entrypoint.sh
 
 #SetUID shell might be handy
-RUN cp /bin/bash /bin/setuidbash && chmod 4755 /bin/setuidbash
+#RUN cp /bin/bash /bin/setuidbash && chmod 4755 /bin/setuidbash
 
 #We can run this but lets let it be overridden with a CMD 
-CMD ["/entrypoint.sh"]
+#CMD ["/entrypoint.sh"]
