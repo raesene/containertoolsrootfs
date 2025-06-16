@@ -51,7 +51,7 @@ RUN curl -OL https://github.com/derailed/k9s/releases/download/v0.32.7/k9s_Linux
 tar -zxvf k9s_Linux_amd64.tar.gz && mv k9s /usr/local/bin && chmod +x /usr/local/bin/k9s && rm -f k9s_Linux_amd64.tar.gz LICENSE README.md
 
 #Setup Starship prompt
-RUN curl -fsSL https://starship.rs/install.sh | sh -s -- -y && mkdir /home/laborant/.config
+RUN curl -fsSL https://starship.rs/install.sh | sh -s -- -y
 
 #Add starship to the bashrc
 RUN echo 'eval "$(starship init bash)"' >> /home/laborant/.bashrc
